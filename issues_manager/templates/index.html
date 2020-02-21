@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Página Inicial {% endblock %}
+
+{% block body %}
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Data Criação</th>
+        <th>Status</th>
+        <th>Usuário</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        {% for i in issues %}
+        <tr>
+            <td>{{ i.pk_db }}</td>
+            <td>{{ i.date_creation }}</td>
+            <td>{{ i.is_open }}</td>
+            <td>{{ i.user | title }}</td>
+            <td>{{ i.description  | title }}</td>
+        </tr>
+        {% endfor %}
+    </tr>
+</table>
+
+{% endblock %}

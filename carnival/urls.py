@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from issues_manager.views import pagina_inicial
+from issues_manager.views import pagina_inicial, issue_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     
     path('', pagina_inicial, name='home'),
+    path('issue_register/', issue_create_view, name='issue_create_view')
 ]
