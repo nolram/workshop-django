@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 USERMODEL = get_user_model()
 
 # Create your models here.
-class Issues(models.Model):
+class Issue(models.Model):
     pk_db = models.AutoField(primary_key=True)
     description = models.CharField(max_length=255, blank=False, null=False)
     date_creation = models.DateTimeField(auto_now_add=True)

@@ -1,9 +1,9 @@
 from django import forms
 
-from .models import Issues
+from .models import Issue
 
 
 class IssueForm(forms.ModelForm):
     class Meta:
-        model = Issues
+        model = Issue
         fields = ["description", "is_open"]
