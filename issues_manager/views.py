@@ -6,7 +6,7 @@ from rest_framework import viewsets
 
 from utils import mixins
 
-from .forms import IssueForm
+from .forms import IssueForm, SearchForm
 from .models import Issue
 from .serializers import IssuesSerializer
 from .filters import FilterIssues
@@ -16,6 +16,7 @@ from .filters import FilterIssues
 def pagina_inicial(request):
     issues = Issue.objects.all()
     return render(request, "index.html", {"issues": issues})
+
 
 @login_required(login_url='/accounts/login/')
 def issue_create_view(request):
@@ -31,6 +32,18 @@ def issue_create_view(request):
 
     return render(request, "form_issue.html", {"form": form})
 
+
+@login_required(login_url='/accounts/login/')
+def search_view(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            issues = Issue.objects.filter(description__icontains=form.cleaned_data["search"])
+            return render(request, "search.html", {"form": form, "issues": issues})
+    else:
+        form = SearchForm()
+
+    return render(request, "search.html", {"form": form, "issues": []})
 
 # Django Rest Framework
 class IssuesViewSet(mixins.DefaultMixin, viewsets.ModelViewSet):
